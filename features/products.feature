@@ -55,3 +55,59 @@ Scenario: Update a product
   When I press the Clear button
   And I press the Search button
   Then I should see the updated product "Laptop" with price "899.99" in the results
+
+Scenario: Delete a product
+  Given I am on the home page
+  When I type "Broken Pen" into the search box
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see the product name "Broken Pen"
+  When I copy the product ID
+  And I clear the form
+  And I paste the ID into the search box
+  And I press the Delete button
+  Then I should see the message "Product has been Deleted!"
+  When I press the Clear button
+  And I press the Search button
+  Then I should NOT see "Broken Pen" in the results
+
+Scenario: List all products
+  Given I am on the home page
+  When I press the Clear button
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see "Hat" in the results
+  And I should see "Shoes" in the results
+  And I should see "Big Mac" in the results
+  And I should see "Sheets" in the results
+
+Scenario: Search products by category
+  Given I am on the home page
+  When I press the Clear button
+  And I select category "Food"
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see "Big Mac" in the results
+  And I should NOT see "Laptop" in the results
+  And I should NOT see "Shoes" in the results
+
+
+Scenario: Search products by availability
+  Given I am on the home page
+  When I press the Clear button
+  And I set availability to "True"
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see "Laptop" in the results
+  And I should NOT see "Broken Pen" in the results
+
+
+Scenario: Search product by name
+  Given I am on the home page
+  When I type "Shoes" into the search box
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see "Shoes" in the results
+  And I should NOT see "Hat" in the results
+
+
