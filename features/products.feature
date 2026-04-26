@@ -36,3 +36,22 @@ Feature: Product Management
   Scenario: Search by availability
     When I filter by availability "true"
     Then I should see 2 available products
+
+Scenario: Update a product
+  Given I am on the home page
+  When I type "Laptop" into the search box
+  And I press the Search button
+  Then I should see the message "Success"
+  And I should see the product name "Laptop"
+  When I change the price to "899.99"
+  And I press the Update button
+  Then I should see the message "Success"
+  When I copy the product ID
+  And I clear the form
+  And I paste the ID into the search box
+  And I press the Retrieve button
+  Then I should see the message "Success"
+  And I should see the price "899.99"
+  When I press the Clear button
+  And I press the Search button
+  Then I should see the updated product "Laptop" with price "899.99" in the results
